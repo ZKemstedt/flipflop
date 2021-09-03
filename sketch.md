@@ -7,22 +7,23 @@ Running the [Spigot](https://www.spigotmc.org/) high performance minecraft serve
 Additional pluggins are used and they are listed further below.
 
 ## Docker
-We will use Docker (docker-compose) to build and deploy our images
+We will use Docker (docker-compose) to build and deploy our images.
+
 inspiration from [here](https://github.com/itzg/docker-minecraft-server#using-docker-compose)
 
 
 ## Plugins
 
 ### Primary plugins
-* Dynmap
-> A Google Maps-like map for your Minecraft server that can be viewed in a browser. 
-[link](https://www.spigotmc.org/resources/dynmap.274/)
+* Dynmap [link](https://www.spigotmc.org/resources/dynmap.274/)
+> A Google Maps-like map for your Minecraft server that can be viewed in a browser.
 We will be hosting a webbserver to show this off
 
-* CoreProtect
+* CoreProtect [link](https://www.spigotmc.org/resources/coreprotect.8631/)
 > CoreProtect is a fast, efficient, data logging and anti-griefing tool. Rollback and restore any amount of damage. Designed with large servers in mind, CoreProtect will record and manage data without impacting your server performance.
-[link](https://www.spigotmc.org/resources/coreprotect.8631/)
+
 Loggs will be stored in a database
+
 
 ### Secondary plugins
 * DiscordSRV
