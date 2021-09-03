@@ -3,7 +3,15 @@ alright så med lite sketching...
 # Projektplan (sketch)
 
 ## Minecraft Server
-Running the [Spigot](https://www.spigotmc.org/) high performance minecraft server with some added plugins
+Running the [Spigot](https://www.spigotmc.org/) high performance minecraft server
+Additional pluggins are used and they are listed further below.
+
+## Docker
+We will use Docker (docker-compose) to build and deploy our images
+inspiration from [here](https://github.com/itzg/docker-minecraft-server#using-docker-compose)
+
+
+## Plugins
 
 ### Primary plugins
 * Dynmap
