@@ -8,9 +8,7 @@ Build development and production environments for a simple application
 * Any database
 * Come up with or Assume what else might be required
 
-Ta fram förslag till hur miljöerna ska byggas och hur deployment from test should be handled.
-
-important aspects:
+Make a draft of how the environments should be set up and how deployment from test should be handled.
 * Show how you manage users in respective environment
 * Deployment should be automized to a relevant degree
 * Some form of monitoring should be in place for relevant programs during production
