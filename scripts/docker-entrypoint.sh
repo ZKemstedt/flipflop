@@ -1,6 +1,7 @@
 #!/bin/sh
 
-if [ -z $DEV ]
+# FUCK YOU
+if [ ! -z $DEV ]
 then
     # generate fresh rsa, dsa keys
     if [ ! -f "/etc/ssh/ssh_host_rsa_key" ]; then
