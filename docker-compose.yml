@@ -1,0 +1,43 @@
+
+# This is the dev compose-file, we don't have a prod one yet
+
+services:
+  spigot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    expose:
+      - "22"
+    ports:
+      - "2220:22" # ssh -p 2220 pingu@localhost (you will need to make ssh keys)
+    volumes: 
+      - mc-world: # /spigot/??? TODO
+      - mc-conf: # /spigot/??? TODO
+    environment: 
+      START_RAM_USAGE: "2G" # DISCUSS/CONSIDER?/...w/e
+      MAX_RAM_USAGE: "8G"   # DISCUSS/CONSIDER?/...w/e
+  
+  # <name>:
+  #   build:
+  #     context: ...
+  #     dockerfile: ...
+
+
+# > core protect  > mysql
+# > dynmap        > webb
+
+
+# ---
+#
+# how the volumes look: an example
+#
+#services
+#  ubuntu:
+#    volumes:
+#      - ubuntu-data:/home
+#
+#volumes:
+#  ubuntu-data:
+#    name: "ubuntu-data"    # the name tag might be redundant, I don't actually know
+#
+# ---
