@@ -21,9 +21,9 @@ RUN chmod +x /scripts/start.sh /scripts/runserver.sh /scripts/docker-entrypoint.
 
 # SSH key setup
 # put public ssh-keys in authorized_keys (file at root in the repository)
-RUN mkdir /home/minecraft/.ssh \
-    && sed -i 's/#PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
-COPY .authorized_keys /home/minecraft/.ssh/authorized_keys
+#RUN mkdir /home/minecraft/.ssh \
+#    && sed -i 's/#PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
+#COPY .authorized_keys /home/minecraft/.ssh/authorized_keys
 
 # Temporarily disabled because I'm really frustrated about having to
 # remove entries from my hosts file every time I rebuild the image
@@ -34,6 +34,12 @@ RUN mkdir /tmp/build /spigot && cd /tmp/build \
     && curl -o BuildTools.jar \
     https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar \
     && java -jar BuildTools.jar --output-dir /spigot
+
+
+#Build DynMap spigot addon
+RUN mkdir /tmp/DynMapBuild/ /DynMap && cd /tmp/DynMapBuild \
+   && curl -o Dynmap.jar \
+   https://github.com/webbukkit/dynmap/releases/download/v3.1-beta-7/Dynmap-3.1-beta7-spigot.jar
 
 ENTRYPOINT [ "/scripts/docker-entrypoint.sh" ]
 CMD [ "/usr/sbin/sshd", "-D" ]
