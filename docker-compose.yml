@@ -1,4 +1,4 @@
-
+version: "3"
 # This is the dev compose-file, we don't have a prod one yet
 
 services:
@@ -16,11 +16,6 @@ services:
     environment: 
       START_RAM_USAGE: "2G" # DISCUSS/CONSIDER?/...w/e
       MAX_RAM_USAGE: "8G"   # DISCUSS/CONSIDER?/...w/e
-  
-#  dynmap:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
   # <name>:
   #   build:
   #     context: ...
