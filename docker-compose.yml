@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 # This is the dev compose-file, we don't have a prod one yet
 
 services:
@@ -8,19 +8,22 @@ services:
       dockerfile: Dockerfile
     expose:
       - "22"
+      - "25565"
     ports:
-      - "2220:22" # ssh -p 2220 pingu@localhost (you will need to make ssh keys)
-    volumes: 
-      - "./spigot/"
-      - "./spigot2/"
-    environment: 
-      START_RAM_USAGE: "2G" # DISCUSS/CONSIDER?/...w/e
-      MAX_RAM_USAGE: "8G"   # DISCUSS/CONSIDER?/...w/e
-  # <name>:
-  #   build:
-  #     context: ...
-  #     dockerfile: ...
+      - "2220:22" # ssh -p 2220 pingu@localhost (add your public sshkey to authorized_keys)
+      - "25565:25565" # for some reason other ports aren't working
+    # volumes: 
+      # - spigot:/spigot/
+      # - spigot2:/spigot2/
+    environment:
+      START_RAM_USAGE: "2G"
+      MAX_RAM_USAGE: "8G"
 
+volumes: 
+  spigot:
+    name: "spigot"
+  spigot2:
+    name: "spigot2"
 
 # > core protect  > mysql
 # > dynmap        > webb
