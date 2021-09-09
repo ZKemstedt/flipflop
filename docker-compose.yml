@@ -15,11 +15,15 @@ services:
       - "25565:25565"
       - "8123:8123"
     volumes: 
-      - "./mc-conf:/spigot/"
-      - "./mc-world:/spigot/world/"
+      - "mc:/spigot"
     environment: 
       START_RAM_USAGE: "2G" # DISCUSS/CONSIDER?/...w/e
       MAX_RAM_USAGE: "8G"   # DISCUSS/CONSIDER?/...w/e
+      EULA: "TRUE"
+
+volumes:
+  mc:
+    name: "mc"
   # <name>:
   #   build:
   #     context: ...
