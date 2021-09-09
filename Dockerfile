@@ -22,7 +22,6 @@ RUN groupadd -g 1000 pingu \
   && echo "pingu:skt" | chpasswd \
   && chown pingu:pingu /home/pingu
 
-
 # Create an igloo where it stores server files
 RUN mkdir -m 770 /data && \
     chown pingu:pingu /data
@@ -31,10 +30,10 @@ RUN mkdir -m 770 /data && \
 COPY ./scripts /scripts
 RUN chmod +x /scripts/start.sh /scripts/runserver.sh /scripts/docker-entrypoint.sh
 
-RUN mkdir /home/pingu/.ssh 
 # SSH key setup
+RUN mkdir /home/pingu/.ssh 
 COPY ./authorized_keys /home/pingu/.ssh/authorized_keys
-run chown pingu:pingu /home/pingu/.ssh/authorized_keys \
+RUN chown pingu:pingu /home/pingu/.ssh/authorized_keys \
     && chmod 600 /home/pingu/.ssh/authorized_keys
 # put public ssh-keys in authorized_keys (file at root in the repository)
     #&& sed -i 's/#PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
@@ -56,7 +55,9 @@ RUN curl -L -o /tmp/build/Dynmap.jar \
    # https://www.spigotmc.org/resources/dynmap.274/download?version=416268
     #https://github.com/webbukkit/dynmap/releases/download/v3.1-beta-7/Dynmap-3.1-beta7-spigot.jar
     https://dev.bukkit.org/projects/dynmap/files/3435158/download
-EXPOSE 25565 25575 8123
+
+# Minecraft, Dynmap
+EXPOSE 25565 8123
 
 ENV START_RAM_USAGE=2G MAX_RAM_USAGE=8G
 
