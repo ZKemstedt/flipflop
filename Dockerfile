@@ -56,9 +56,6 @@ RUN curl -L -o /tmp/build/Dynmap.jar \
     #https://github.com/webbukkit/dynmap/releases/download/v3.1-beta-7/Dynmap-3.1-beta7-spigot.jar
     https://dev.bukkit.org/projects/dynmap/files/3435158/download
 
-# Minecraft, Dynmap
-EXPOSE 25565 8123
-
 ENV START_RAM_USAGE=2G MAX_RAM_USAGE=8G
 
 ENTRYPOINT [ "/scripts/docker-entrypoint.sh" ]

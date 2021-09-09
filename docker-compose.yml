@@ -8,6 +8,8 @@ services:
       dockerfile: Dockerfile
     expose:
       - "22"
+      - "25565"
+      - "8123"
     ports:
       - "2220:22" # ssh -p 2220 pingu@localhost (you will need to make ssh keys)
       - "25565:25565"
