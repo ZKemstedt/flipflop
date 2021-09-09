@@ -5,6 +5,7 @@ secret
 # local dev files
 spigot-1.17.1.jar
 Dynmap-3.2-beta-3-spigot.jar
+CoreProtect-20.1.jar
 
 # old local dev files
 mc-conf

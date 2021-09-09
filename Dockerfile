@@ -57,6 +57,9 @@ COPY --from=spigot /spg/spigot*.jar /data/
 RUN curl -L -o /data/plugins/Dynmap.jar \
     https://dev.bukkit.org/projects/dynmap/files/3435158/download
 
+RUN curl -L -o /data/plugins/CoreProtect.jar \
+    https://www.spigotmc.org/resources/coreprotect.8631/download
+
 
 # Move scripts over
 COPY scripts/* /
