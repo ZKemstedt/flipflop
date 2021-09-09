@@ -1,2 +1,2 @@
 #!/bin/bash
-java -Xms${START_RAM_USAGE} -Xmx${MAX_RAM_USAGE} -jar /buildResult/spigot.jar
+java -Xms2G -Xmx8G -jar /spigot/spigot*.jar
