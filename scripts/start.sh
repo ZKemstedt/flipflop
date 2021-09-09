@@ -1,10 +1,14 @@
-#!/bin/sh
-cd /spigot
-pwd
-YELLOW='\033[0;33m'
-NC='\033[0m'
-EULA=true
+#!/bin/bash
 
-sed -i 's/false/true/g' eula.txt
+# Add functions from utils.sh
+. ${SCRIPTS:-/}utils.sh
 
-/scripts/runserver.sh
+# accept EULA
+writeEula
+
+# start ssh server
+ssh-keygen -A
+/usr/sbin/sshd
+
+# exec java -Xms2G -Xmx8G -jar /data/spigot*.jar
+exec java -Xms2G -Xmx8G -jar /data/spigot*.jar
