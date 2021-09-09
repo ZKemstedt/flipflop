@@ -24,27 +24,3 @@ services:
 volumes:
   mc:
     name: "mc"
-  # <name>:
-  #   build:
-  #     context: ...
-  #     dockerfile: ...
-
-
-# > core protect  > mysql
-# > dynmap        > webb
-
-
-# ---
-#
-# how the volumes look: an example
-#
-#services
-#  ubuntu:
-#    volumes:
-#      - ubuntu-data:/home
-#
-#volumes:
-#  ubuntu-data:
-#    name: "ubuntu-data"    # the name tag might be redundant, I don't actually know
-#
-# ---

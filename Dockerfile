@@ -1,16 +1,29 @@
 # syntax=docker/dockerfile:1
 
+FROM openjdk:16-alpine3.13 as spigot
+
+RUN apk add --update --no-cache git curl
+
+#NOTE if you have a local jar...
+# RUN mkdir /spg
+# COPY ./spigot-1.17.1.jar /spg/
+
+#NOTE otherwise...
+RUN mkdir /tmp/build /spg && cd /spg \
+    && curl -o /tmp/build/BuildTools.jar \
+    https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar \
+    && java -jar /tmp/build/BuildTools.jar --output-dir .
+
+
 FROM adoptopenjdk:16-jre
 
-# RUN apk add --update --no-cache git shadow vim wget doas sed openssh-server curl
-
 RUN apt-get update \
-  && DEBIAN_FRONTEND=noninteractive \
-  apt-get install -y \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y \
     openssh-server \
-    gosu \
+    # gosu \
     sudo \
-    net-tools \
+    # net-tools \
     curl wget \
     git \
     unzip \
@@ -19,9 +32,9 @@ RUN apt-get update \
 
 # Add a penguin for running the server
 RUN groupadd -g 1000 pingu \
-  && useradd --no-log-init -m -u 1000 -g pingu pingu \
-  && echo "pingu:skt" | chpasswd \
-  && chown pingu:pingu /home/pingu
+    && useradd --no-log-init -m -u 1000 -g pingu pingu \
+    && echo "pingu:skt" | chpasswd \
+    && chown pingu:pingu /home/pingu
 
 # SSH key setup
 RUN mkdir /run/sshd
@@ -34,22 +47,18 @@ RUN chown pingu:pingu /home/pingu/.ssh/authorized_keys \
     #&& sed -i 's/#PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
 # COPY ./authorized_keys /home/pingu/.ssh/authorized_keys
 
-# Temporarily disabled because I'm really frustrated about having to
-# remove entries from my hosts file every time I rebuild the image
-#RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
-
+# Generate Fresh rsa keys
+# RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key 
 
 RUN mkdir -p /data/plugins
-# COPY Dynmap-3.2-beta-3-spigot.jar /data/plugins/Dynmap-3.2-beta-3-spigot.jar
-# COPY spigot-1.17.1.jar /data/spigot-1.17.1.jar
 
-
+COPY --from=spigot /spg/spigot*.jar /spigot/
 
 # Build Spigot
-RUN mkdir /tmp/build && cd /data \
-    && curl -o /tmp/build/BuildTools.jar \
-    https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar \
-    && java -jar /tmp/build/BuildTools.jar --rev latest --output-dir .
+# RUN mkdir /tmp/build && cd /data \
+#     && curl -o /tmp/build/BuildTools.jar \
+#     https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar \
+#     && java -jar /tmp/build/BuildTools.jar --rev latest --output-dir .
 
 
 # Build DynMap spigot addon
@@ -59,9 +68,6 @@ RUN curl -L -o /data/plugins/Dynmap.jar \
     https://dev.bukkit.org/projects/dynmap/files/3435158/download
 
 WORKDIR /data
-
-# unused
-ENV START_RAM_USAGE=2G MAX_RAM_USAGE=8G
 
 # Move scripts over
 COPY scripts/* /
