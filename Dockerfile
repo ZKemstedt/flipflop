@@ -69,4 +69,3 @@ WORKDIR /data
 STOPSIGNAL SIGTERM
 
 ENTRYPOINT [ "/start.sh" ]
-# CMD [ "/usr/sbin/sshd", "-D" ]
