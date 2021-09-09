@@ -9,37 +9,18 @@ services:
     expose:
       - "22"
       - "25565"
+      - "8123"
     ports:
-      - "2220:22" # ssh -p 2220 pingu@localhost (add your public sshkey to authorized_keys)
-      - "25565:25565" # for some reason other ports aren't working
-    # volumes: 
-      # - spigot:/spigot/
-      # - spigot2:/spigot2/
-    environment:
-      START_RAM_USAGE: "2G"
-      MAX_RAM_USAGE: "8G"
+      - "2220:22" # ssh -p 2220 pingu@localhost (you will need to make ssh keys)
+      - "25565:25565"
+      - "8123:8123"
+    volumes: 
+      - "mc:/spigot"
+    environment: 
+      START_RAM_USAGE: "2G" # DISCUSS/CONSIDER?/...w/e
+      MAX_RAM_USAGE: "8G"   # DISCUSS/CONSIDER?/...w/e
+      EULA: "TRUE"
 
-volumes: 
-  spigot:
-    name: "spigot"
-  spigot2:
-    name: "spigot2"
-
-# > core protect  > mysql
-# > dynmap        > webb
-
-
-# ---
-#
-# how the volumes look: an example
-#
-#services
-#  ubuntu:
-#    volumes:
-#      - ubuntu-data:/home
-#
-#volumes:
-#  ubuntu-data:
-#    name: "ubuntu-data"    # the name tag might be redundant, I don't actually know
-#
-# ---
+volumes:
+  mc:
+    name: "mc"

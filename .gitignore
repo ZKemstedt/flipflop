@@ -1,5 +1,14 @@
-# nobody is stupid enough to throw their private ones in here, riiiiight?
+# secrets
 super_secret_key_dont_look
 secret
 
+# local dev files
+spigot-1.17.1.jar
+Dynmap-3.2-beta-3-spigot.jar
+
+# old local dev files
+mc-conf
+mc-world
+old
 local
+
