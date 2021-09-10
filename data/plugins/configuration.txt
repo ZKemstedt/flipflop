@@ -28,7 +28,7 @@ storage:
   # MySQL DB for map storage (at 'hostname':'port' with flags "flags" in database 'database' using user 'userid' password 'password' and table prefix 'prefix')
   type: mysql
   hostname: localhost
-  port: 3306
+  port: 33061
   database: dynmap
   userid: meincraftuser
   password: meincraftpw
