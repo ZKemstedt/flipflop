@@ -10,5 +10,7 @@ writeEula
 ssh-keygen -A
 /usr/sbin/sshd
 
+ls spigot/ -l@
+
 # exec java -Xms2G -Xmx8G -jar /data/spigot*.jar
-exec java -Xms2G -Xmx8G -jar /data/spigot*.jar
+exec java -Xms2G -Xmx8G -jar /spigot/spigot*.jar

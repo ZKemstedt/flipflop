@@ -21,6 +21,18 @@ services:
       MAX_RAM_USAGE: "8G"   # DISCUSS/CONSIDER?/...w/e
       EULA: "TRUE"
 
+  sqldb:
+    image: mysql:5.7
+    volumes:
+      - "db_data:/var/lib/mysql"
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: somemeincraft
+      MYSQL_DATABASE: dynmap
+      MYSQL_USER: meincraftuser
+      MYSQL_PASSWORD: meincraftpw
+
 volumes:
   mc:
     name: "mc"
+  db_data: {}

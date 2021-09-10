@@ -12,7 +12,7 @@ RUN apk add --update --no-cache git curl
 RUN mkdir /tmp/build /spg && cd /spg \
     && curl -o /tmp/build/BuildTools.jar \
     https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar \
-    && java -jar /tmp/build/BuildTools.jar --output-dir .
+    && java -jar /tmp/build/BuildTools.jar --output-dir /spg
 
 
 FROM adoptopenjdk:16-jre
@@ -50,7 +50,8 @@ RUN chown pingu:pingu /home/pingu/.ssh/authorized_keys \
 # Generate Fresh rsa keys
 # RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key 
 
-RUN mkdir -p /data/plugins
+RUN mkdir -p /data/plugins && mkdir -p /spigot
+
 
 COPY --from=spigot /spg/spigot*.jar /spigot/
 
@@ -72,9 +73,12 @@ WORKDIR /data
 # Move scripts over
 COPY scripts/* /
 
+#Move dynmap config
+COPY data/plugins/configuration.txt data/plugins/dynmap/
+
 # dos2unix fixes line endings
 # Also set permissions
-RUN dos2unix /start* && chmod +x /start*
+RUN dos2unix /*.sh && chmod +x /start*
 
 STOPSIGNAL SIGTERM
 
