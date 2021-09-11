@@ -8,7 +8,7 @@ if [ ! "$(ls -A /data)" ]; then
     # accept EULA
     writeEula
 
-    mkdir /data/plugins
+    mkdir -p /data/plugins/mysql
 
     # Download Spigot
     curl -L -o /data/spigot.jar https://download.getbukkit.org/spigot/spigot-1.17.1.jar
@@ -17,12 +17,12 @@ if [ ! "$(ls -A /data)" ]; then
     curl -L -o /data/plugins/Dynmap.jar https://dev.bukkit.org/projects/dynmap/files/3435158/download
 
     # Download CoreProtect
-    curl -L -o /data/plugins/CoreProtect.jar https://www.spigotmc.org/resources/coreprotect.8631/download?version=411732
+    curl -L -o /data/plugins/CoreProtect.jar https://github.com/PlayPro/CoreProtect/releases/download/v20.1/CoreProtect-20.1.jar
 
     # Download SQL connector
     curl -L -o /data/plugins/msql.tar.gz https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
     tar -xf /data/plugins/msql.tar.gz -C /data/plugins/mysql && rm /data/plugins/msql.tar.gz
-    mv /data/plugins/mysql/*.jar /data/plugins/
+    mv /data/plugins/mysql/mysql*/*.jar /data/plugins/
 fi
 
 # Move over (WILL OVERWRITE) config files
