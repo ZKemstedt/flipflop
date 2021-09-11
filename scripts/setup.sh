@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$(ls -A /data)" ]; then
+if [ ! "$(ls -A /data)" ]; then
 
     # Add functions from utils.sh
     . ${SCRIPTS:-/}utils.sh
@@ -21,6 +21,11 @@ if [ "$(ls -A /data)" ]; then
 
     # Download CoreProtect
     curl -L -o /data/plugins/CoreProtect.jar https://www.spigotmc.org/resources/coreprotect.8631/download
+
+    # Download SQL connector
+    curl -L -o /data/plugins/msql.tar.gz https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
+    tar -xf msql.tar.gz -C mysql && rm msql.tar.gz
+    mv /data/plugins/mysql/*.jar /data/plugins/
 
 else
     rm -rf /tmp/conf
