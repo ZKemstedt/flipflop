@@ -11,16 +11,17 @@ services:
       - "25565"
       - "8123"
     ports:
-      - "2220:22" # ssh -p 2220 pingu@localhost (you will need to make ssh keys)
-      - "25565:25565"
-      - "8123:8123"
+      - "2220:22"     # ssh
+      - "25565:25565" # minecraft
+      - "8123:8123"   # dynmap
     volumes: 
-      - "mc:/spigot"
+      # - mc:/data
+      - ./mc:/data
     environment: 
       START_RAM_USAGE: "2G" # DISCUSS/CONSIDER?/...w/e
       MAX_RAM_USAGE: "8G"   # DISCUSS/CONSIDER?/...w/e
       EULA: "TRUE"
 
-volumes:
-  mc:
-    name: "mc"
+# volumes:
+#   mc:
+#     name: "mc"
