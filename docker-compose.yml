@@ -2,10 +2,37 @@ version: "3.7"
 # This is the dev compose-file, we don't have a prod one yet
 
 services:
+
+  sqldb:
+    image: mysql:5.7
+    volumes:
+      - "db_data:/var/lib/mysql"
+    restart: always
+    #remove ports for production
+    ports:
+#    web:
+#        build: -
+#        links:
+          
+      - "33061:3306"
+    expose:
+      - "3306"
+    environment: 
+      MYSQL_ROOT_PASSWORD: somemeincraft
+      MYSQL_DATABASE: dynmap
+      MYSQL_USER: meincraftuser
+      MYSQL_PASSWORD: meincraftpw
+    networks:
+      - mcnet
+
   spigot:
+    depends_on: 
+      - sqldb
     build:
       context: .
       dockerfile: Dockerfile
+    links:
+      - sqldb:sqldb
     expose:
       - "22"
       - "25565"
@@ -20,21 +47,14 @@ services:
       START_RAM_USAGE: "2G" # DISCUSS/CONSIDER?/...w/e
       MAX_RAM_USAGE: "8G"   # DISCUSS/CONSIDER?/...w/e
       EULA: "TRUE"
+    networks: 
+      - mcnet
 
-  sqldb:
-    image: mysql:5.7
-    volumes:
-      - "db_data:/var/lib/mysql"
-    restart: always
-    ports:
-      - "33061:3306"
-    environment: 
-      MYSQL_ROOT_PASSWORD: somemeincraft
-      MYSQL_DATABASE: dynmap
-      MYSQL_USER: meincraftuser
-      MYSQL_PASSWORD: meincraftpw
 
 volumes:
   mc:
     name: "mc"
   db_data: {}
+
+networks:
+  mcnet:
