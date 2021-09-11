@@ -37,12 +37,14 @@ services:
       - "22"
       - "25565"
       - "8123"
+      - "25575"
     ports:
       - "2220:22" # ssh -p 2220 pingu@localhost (you will need to make ssh keys)
       - "25565:25565"
+      - "25575:25575"
       - "8123:8123"
     volumes: 
-      - "mc:/spigot"
+      - "mc:/data"
     environment: 
       START_RAM_USAGE: "2G" # DISCUSS/CONSIDER?/...w/e
       MAX_RAM_USAGE: "8G"   # DISCUSS/CONSIDER?/...w/e
