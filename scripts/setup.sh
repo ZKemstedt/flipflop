@@ -20,7 +20,7 @@ if [ ! "$(ls -A /data)" ]; then
     curl -L -o /data/plugins/Dynmap.jar https://dev.bukkit.org/projects/dynmap/files/3435158/download
 
     # Download CoreProtect
-    curl -L -o /data/plugins/CoreProtect.jar https://www.spigotmc.org/resources/coreprotect.8631/download
+    curl -L -o /data/plugins/CoreProtect.jar https://www.spigotmc.org/resources/coreprotect.8631/download?version=411732
 
     # Download SQL connector
     curl -L -o /data/plugins/msql.tar.gz https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
