@@ -19,6 +19,8 @@ deftemplatesuffix: hires
 #  filetree: classic and default scheme: tree of files, with all map data under the directory indicated by 'tilespath' setting
 #  sqlite: single SQLite database file (this can get VERY BIG), located at 'dbfile' setting (default is file dynmap.db in data directory)
 #  mysql: MySQL database, at hostname:port in database, accessed via userid with password
+#  mariadb: MariaDB database, at hostname:port in database, accessed via userid with password
+#  postgres: PostgreSQL database, at hostname:port in database, accessed via userid with password
 storage:
   # Filetree storage (standard tree of image files for maps)
   #type: filetree
@@ -27,12 +29,12 @@ storage:
   #dbfile: dynmap.db
   # MySQL DB for map storage (at 'hostname':'port' with flags "flags" in database 'database' using user 'userid' password 'password' and table prefix 'prefix')
   type: mysql
-  hostname: localhost
-  port: 33061
+  hostname: sqldb
+  port: 3306
   database: dynmap
   userid: meincraftuser
   password: meincraftpw
-  prefix: ""
+  prefix: "dyn"
   flags: "?allowReconnect=true"
   
 components:
