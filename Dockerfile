@@ -29,7 +29,7 @@ COPY conf /tmp/conf
 COPY scripts/* /
 
 # dos2unix fixes line endings for scripts
-RUN dos2unix /start* && chmod +x /start*
+RUN dos2unix /*.se && chmod +x /*.se
 
 WORKDIR /data
 
