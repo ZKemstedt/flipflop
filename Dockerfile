@@ -8,9 +8,7 @@ RUN apt-get update \
     openssh-server \
     curl \
     git \
-    # unzip \
     dos2unix \
-    vim \
     && apt-get clean
 
 # Add a penguin for running the server
@@ -20,11 +18,10 @@ RUN groupadd -g 1000 pingu \
     && chown pingu:pingu /home/pingu
 
 # SSH key setup
-RUN mkdir /run/sshd /home/pingu/.ssh 
+RUN mkdir /run/sshd /home/pingu/.ssh
 COPY ./authorized_keys /home/pingu/.ssh/authorized_keys
 RUN chown pingu:pingu /home/pingu/.ssh/authorized_keys \
     && chmod 600 /home/pingu/.ssh/authorized_keys
-
 
 # Move conf over
 RUN mkdir /tmp/conf

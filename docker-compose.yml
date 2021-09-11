@@ -46,8 +46,8 @@ services:
     volumes: 
       - ./mc:/data
     environment: 
-      START_RAM_USAGE: "2G" # DISCUSS/CONSIDER?/...w/e
-      MAX_RAM_USAGE: "8G"   # DISCUSS/CONSIDER?/...w/e
+      XMS: "2G" # Starting Memory
+      XMX: "8G" # Max Memory Usage
       EULA: "TRUE"
     networks: 
       - mcnet
