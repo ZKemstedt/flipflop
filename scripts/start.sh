@@ -1,3 +1,3 @@
 #!/bin/bash
 
-exec java -Xms2G -Xmx8G -jar /data/spigot.jar
+exec java -Xms${XMS} -Xmx${XMX} -jar /data/spigot.jar

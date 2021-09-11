@@ -18,8 +18,8 @@ services:
     volumes: 
       - ./mc:/data
     environment: 
-      START_RAM_USAGE: "2G"
-      MAX_RAM_USAGE: "8G"
+      XMS: "2G" # Starting Memory
+      XMX: "8G" # Max Memory Usage
       EULA: "TRUE"
 
 # volumes:
