@@ -10,6 +10,7 @@ RUN apt-get update \
     git \
     # unzip \
     dos2unix \
+    vim \
     && apt-get clean
 
 # Add a penguin for running the server
@@ -25,17 +26,16 @@ RUN chown pingu:pingu /home/pingu/.ssh/authorized_keys \
     && chmod 600 /home/pingu/.ssh/authorized_keys
 
 
-WORKDIR /data
-
-# Move scripts over
+# Move conf over
+RUN mkdir /tmp/conf
+COPY conf /tmp/conf
 COPY scripts/* /
 
-#Move dynmap config
-COPY conf/plugins/dynmap/configuration.txt /data/plugins/dynmap/
+# dos2unix fixes line endings for scripts
+RUN dos2unix /start* && chmod +x /start*
 
-# dos2unix fixes line endings
-RUN dos2unix /*.sh && chmod +x /start*
+WORKDIR /data
 
 STOPSIGNAL SIGTERM
 
-ENTRYPOINT [ "/start.sh" ]
+ENTRYPOINT [ "/setup.sh" ]

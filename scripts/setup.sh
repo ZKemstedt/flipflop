@@ -24,9 +24,7 @@ if [ ! "$(ls -A /data)" ]; then
 
     # Download SQL connector
     curl -L -o /data/plugins/msql.tar.gz https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
-
     tar -xf msql.tar.gz -C mysql && rm msql.tar.gz
-    
     mv /data/plugins/mysql/*.jar /data/plugins/
 
 else
