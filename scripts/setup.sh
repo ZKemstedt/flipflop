@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ "$(ls -A /data)" ]; then
+if [ ! "$(ls -A /data)" ]; then
 
     # Add functions from utils.sh
     . ${SCRIPTS:-/}utils.sh
