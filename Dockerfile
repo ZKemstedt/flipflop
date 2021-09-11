@@ -21,8 +21,7 @@ RUN groupadd -g 1000 pingu \
     && chown pingu:pingu /home/pingu
 
 # SSH key setup
-RUN mkdir /run/sshd
-RUN mkdir /home/pingu/.ssh 
+RUN mkdir /run/sshd /home/pingu/.ssh
 COPY ./authorized_keys /home/pingu/.ssh/authorized_keys
 RUN chown pingu:pingu /home/pingu/.ssh/authorized_keys \
     && chmod 600 /home/pingu/.ssh/authorized_keys

@@ -18,8 +18,8 @@ services:
     volumes: 
       - ./mc:/data
     environment: 
-      START_RAM_USAGE: "2G" # DISCUSS/CONSIDER?/...w/e
-      MAX_RAM_USAGE: "8G"   # DISCUSS/CONSIDER?/...w/e
+      START_RAM_USAGE: "2G"
+      MAX_RAM_USAGE: "8G"
       EULA: "TRUE"
 
 # volumes:
