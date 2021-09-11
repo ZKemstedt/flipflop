@@ -87,7 +87,7 @@ WORKDIR /data
 COPY scripts/* /
 
 #Move dynmap config
-COPY data/plugins/configuration.txt /data/plugins/dynmap/
+COPY conf/plugins/dynmap/configuration.txt /data/plugins/dynmap/
 #RUN dos2unix /plugins/dynmap/configuration.txt
 RUN ls /data/plugins/dynmap/
 #RUN chmod +x /plugins/dynmap/mysql.jar
