@@ -15,6 +15,17 @@ RUN mkdir /tmp/build /spg && cd /spg \
     && java -jar /tmp/build/BuildTools.jar --output-dir /spg
 
 
+#Note - Alpine uses busyboxTAR which isnt real tar by default.
+RUN apk add --no-cache tar
+#Note - Curl doesnt work but WGET does??? WHY
+RUN mkdir /tmp/sql /sql \
+    && wget -O /tmp/sql/mysql.tar.gz \
+    https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
+
+RUN tar -xf /tmp/sql/mysql.tar.gz -C /sql/
+RUN mv /sql/mysql-connector-java* /sql/mysql.jar
+
+
 FROM adoptopenjdk:16-jre
 
 RUN apt-get update \
@@ -54,6 +65,8 @@ RUN mkdir -p /data/plugins && mkdir -p /spigot
 
 
 COPY --from=spigot /spg/spigot*.jar /spigot/
+COPY --from=spigot /sql/mysql.jar /data/plugins/dynmap/mysql.jar
+RUN ls /data/plugins/dynmap/
 
 # Build Spigot
 # RUN mkdir /tmp/build && cd /data \
@@ -74,7 +87,10 @@ WORKDIR /data
 COPY scripts/* /
 
 #Move dynmap config
-COPY data/plugins/configuration.txt data/plugins/dynmap/
+COPY data/plugins/configuration.txt /data/plugins/dynmap/
+#RUN dos2unix /plugins/dynmap/configuration.txt
+RUN ls /data/plugins/dynmap/
+#RUN chmod +x /plugins/dynmap/mysql.jar
 
 # dos2unix fixes line endings
 # Also set permissions
