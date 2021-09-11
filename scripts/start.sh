@@ -11,4 +11,4 @@ ssh-keygen -A
 /usr/sbin/sshd
 
 # exec java -Xms2G -Xmx8G -jar /data/spigot*.jar
-exec java -Xms2G -Xmx8G -jar /data/spigot*.jar
+exec java -Xms2G -Xmx8G -jar /data/spigot.jar
