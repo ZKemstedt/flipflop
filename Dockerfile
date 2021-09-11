@@ -6,12 +6,9 @@ RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
     apt-get install -y \
     openssh-server \
-    sudo \
-    curl wget \
+    curl \
     git \
-    unzip \
     dos2unix \
-    vim \
     && apt-get clean
 
 # Add a penguin for running the server
