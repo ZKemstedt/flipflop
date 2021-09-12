@@ -30,7 +30,6 @@ fi
 
 # Move over (WILL OVERWRITE) config files
 mv /tmp/conf/plugins/* /data/plugins
-rm -d /tmp/conf/plugins
 mv /tmp/conf/* /data
 rm -rf /tmp/conf
 
