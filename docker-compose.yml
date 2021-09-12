@@ -6,7 +6,7 @@ services:
   sqldb:
     image: mysql:5.7
     volumes:
-      - "db_data:/var/lib/mysql"
+      - "./db_data:/var/lib/mysql"
     restart: always
     #remove ports for production
     ports:
@@ -14,14 +14,14 @@ services:
 #        build: -
 #        links:
           
-      - "33061:3306"
+      - "3306:3306"
     expose:
       - "3306"
     environment: 
-      MYSQL_ROOT_PASSWORD: somemeincraft
+      MYSQL_ROOT_PASSWORD: skt
       MYSQL_DATABASE: dynmap
-      MYSQL_USER: meincraftuser
-      MYSQL_PASSWORD: meincraftpw
+      MYSQL_USER: pingu
+      MYSQL_PASSWORD: skt
     networks:
       - mcnet
 
