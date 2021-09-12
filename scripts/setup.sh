@@ -8,7 +8,7 @@ if [ ! "$(ls -A /data)" ]; then
     # accept EULA
     writeEula
 
-    mkdir -p /data/plugins/mysql
+    mkdir -p /data/plugins
 
     # Download Spigot
     curl -L -o /data/spigot.jar https://download.getbukkit.org/spigot/spigot-1.17.1.jar
@@ -20,13 +20,18 @@ if [ ! "$(ls -A /data)" ]; then
     curl -L -o /data/plugins/CoreProtect.jar https://github.com/PlayPro/CoreProtect/releases/download/v20.1/CoreProtect-20.1.jar
 
     # Download SQL connector
-    curl -L -o /data/plugins/msql.tar.gz https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.26.tar.gz
-    tar -xf /data/plugins/msql.tar.gz -C /data/plugins/mysql && rm /data/plugins/msql.tar.gz
-    mv /data/plugins/mysql/mysql*/*.jar /data/plugins/
+    curl -L -o /home/pingu/msql.deb https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java_8.0.26-1ubuntu20.04_all.deb
+    apt install -y /home/pingu/msql.deb
+
+    # set up rcon
+    curl -L -o /home/pingu/rcon.tar.gz https://github.com/itzg/rcon-cli/releases/download/1.4.8/rcon-cli_1.4.8_linux_amd64.tar.gz
+    tar -xf /home/pingu/rcon.tar.gz -C /home/pingu/
 fi
 
 # Move over (WILL OVERWRITE) config files
-mv /tmp/conf/* /data/
+mv /tmp/conf/plugins/* /data/plugins
+rm -d /tmp/conf/plugins
+mv /tmp/conf/* /data
 rm -rf /tmp/conf
 
 # start ssh server
