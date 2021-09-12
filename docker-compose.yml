@@ -5,15 +5,11 @@ services:
 
   sqldb:
     image: mysql:5.7
+    command: --default-authentication-plugin=mysql_native_password
     volumes:
       - "./db_data:/var/lib/mysql"
     restart: always
-    #remove ports for production
     ports:
-#    web:
-#        build: -
-#        links:
-          
       - "3306:3306"
     expose:
       - "3306"
