@@ -32,8 +32,8 @@ storage:
   hostname: sqldb
   port: 3306
   database: dynmap
-  userid: meincraftuser
-  password: meincraftpw
+  userid: pingu
+  password: skt
   prefix: "dyn"
   flags: "?allowReconnect=true"
   
