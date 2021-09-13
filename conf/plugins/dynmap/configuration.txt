@@ -31,7 +31,7 @@ storage:
   type: mysql
   hostname: sqldb
   port: 3306
-  database: dynmap
+  database: Dynmap
   userid: pingu
   password: skt
   prefix: "dyn"
