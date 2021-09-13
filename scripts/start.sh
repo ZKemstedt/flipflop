@@ -1,7 +1,6 @@
 #!/bin/bash
-sleep 45
 exec java \
--Xms${XMS}
+-Xms${XMS} \
 -Xmx${XMX} \
 -XX:+UseG1GC \
 -XX:+ParallelRefProcEnabled \
