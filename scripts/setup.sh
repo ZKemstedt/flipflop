@@ -29,8 +29,7 @@ if [ ! "$(ls -A /data)" ]; then
 fi
 
 # Move over (WILL OVERWRITE) config files
-mv /tmp/conf/plugins/* /data/plugins
-mv /tmp/conf/* /data
+cp -rf /tmp/conf/* /data
 rm -rf /tmp/conf
 
 # start ssh server
