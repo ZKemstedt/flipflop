@@ -1,14 +1,16 @@
 #!/bin/bash
 
+# On first start after build
 if [ ! "$(ls -A /data)" ]; then
+    # Move over configuration files
+    mv /tmp/conf/* /data/
+    rm -rf /tmp/conf
 
     # Add functions from utils.sh
     . ${SCRIPTS:-/}utils.sh
 
-    # accept EULA
+    # Accept EULA
     writeEula
-
-    mkdir -p /data/plugins
 
     # Download Spigot
     curl -L -o /data/spigot.jar https://download.getbukkit.org/spigot/spigot-1.17.1.jar
@@ -23,15 +25,10 @@ if [ ! "$(ls -A /data)" ]; then
     curl -L -o /home/pingu/msql.deb https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java_8.0.26-1ubuntu20.04_all.deb
     apt install -y /home/pingu/msql.deb
 
-    # set up rcon
+    # Set up rcon
     curl -L -o /home/pingu/rcon.tar.gz https://github.com/itzg/rcon-cli/releases/download/1.4.8/rcon-cli_1.4.8_linux_amd64.tar.gz
     tar -xf /home/pingu/rcon.tar.gz -C /home/pingu/
 fi
-
-# Move over (WILL OVERWRITE) config files
-mv /tmp/conf/plugins/* /data/plugins
-mv /tmp/conf/* /data
-rm -rf /tmp/conf
 
 # start ssh server
 ssh-keygen -A
