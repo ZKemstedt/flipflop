@@ -26,10 +26,11 @@ if [ ! "$(ls -A /data)" ]; then
     curl -L -o /home/pingu/msql.deb https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java_8.0.26-1ubuntu20.04_all.deb
     apt install -y /home/pingu/msql.deb
 
-    # Set up rcon
-    curl -L -o /home/pingu/rcon.tar.gz https://github.com/itzg/rcon-cli/releases/download/1.4.8/rcon-cli_1.4.8_linux_amd64.tar.gz
-    tar -xf /home/pingu/rcon.tar.gz -C /home/pingu/
 fi
+
+# Set up rcon
+curl -L -o /home/pingu/rcon.tar.gz https://github.com/itzg/rcon-cli/releases/download/1.4.8/rcon-cli_1.4.8_linux_amd64.tar.gz
+tar -xf /home/pingu/rcon.tar.gz -C /home/pingu/
 
 # Move over (WILL OVERWRITE) config files
 cp -rf /tmp/conf/* /data
