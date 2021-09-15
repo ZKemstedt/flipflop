@@ -9,20 +9,20 @@ services:
     volumes:
       - "./db_data:/var/lib/mysql"
       - "./docker-scripts:/docker-entrypoint-initdb.d"
-    restart: always
+    restart: unless-stopped
     ports:
       - "3306:3306"
     expose:
       - "3306"
     environment: 
       MYSQL_ROOT_PASSWORD: skt
-      # MYSQL_DATABASE: dynmap
       MYSQL_USER: pingu
       MYSQL_PASSWORD: skt
     networks:
       - mcnet
 
   spigot:
+    restart: unless-stopped
     depends_on: 
       - sqldb
     build:
@@ -41,19 +41,13 @@ services:
       - "8123:8123"   # dynmap
       - "25575:25575" # rcon
     volumes: 
-      - ./mc:/data
+      - "./mc:/data"
     environment: 
       XMS: "2G" # Starting Memory
       XMX: "8G" # Max Memory Usage
       EULA: "TRUE"
     networks: 
       - mcnet
-
-
-volumes:
-  #mc:
-    #name: "mc"
-  db_data: {}
 
 networks:
   mcnet:
