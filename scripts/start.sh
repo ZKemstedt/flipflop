@@ -1,5 +1,4 @@
 #!/bin/bash
-sleep 45
 exec java \
 -Xms${XMS} \
 -Xmx${XMX} \
