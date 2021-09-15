@@ -43,8 +43,8 @@ services:
     volumes: 
       - "./mc:/data"
     environment: 
-      XMS: "2G" # Starting Memory
-      XMX: "8G" # Max Memory Usage
+      XMS: "16G" # Starting Memory
+      XMX: "16G" # Max Memory Usage
       EULA: "TRUE"
     networks: 
       - mcnet
