@@ -1,42 +1,38 @@
 # syntax=docker/dockerfile:1
 
-FROM openjdk:16-alpine3.13
+FROM adoptopenjdk:16-jre
 
-RUN apk add --update --no-cache git shadow vim wget doas sed openssh curl
+RUN apt-get update \
+    && DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y \
+    openssh-server \
+    curl \
+    git \
+    dos2unix \
+    && apt-get clean
 
 # Add a penguin for running the server
 RUN groupadd -g 1000 pingu \
-  && useradd --no-log-init -m -u 1000 -g pingu pingu \
-  && echo "pingu:skt" | chpasswd \
-  && echo "permit pingu as root" >> /etc/doas.conf \
-  && chown pingu:pingu /home/pingu
-
-# Create an igloo where it stores server files
-RUN mkdir -m 770 /data && \
-    chown pingu:pingu /data
-
-# Move scripts over
-COPY ./scripts /scripts
-RUN chmod +x /scripts/start.sh /scripts/runserver.sh /scripts/docker-entrypoint.sh
+    && useradd --no-log-init -m -u 1000 -g pingu pingu \
+    && echo "pingu:skt" | chpasswd \
+    && chown pingu:pingu /home/pingu
 
 # SSH key setup
-# put public ssh-keys in authorized_keys (file at root in the repository)
-RUN mkdir /home/minecraft/.ssh \
-    && sed -i 's/#PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh/sshd_config
-COPY .authorized_keys /home/minecraft/.ssh/authorized_keys
+RUN mkdir /run/sshd /home/pingu/.ssh
+COPY ./authorized_keys /home/pingu/.ssh/authorized_keys
+RUN chown pingu:pingu /home/pingu/.ssh/authorized_keys \
+    && chmod 600 /home/pingu/.ssh/authorized_keys
 
-# Temporarily disabled because I'm really frustrated about having to
-# remove entries from my hosts file every time I rebuild the image
-#RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
+# Move conf over
+RUN mkdir /tmp/conf
+COPY conf /tmp/conf
+COPY scripts/* /
 
-# Build Spigot
-RUN mkdir /tmp/build /spigot && cd /tmp/build \
-    && curl -o BuildTools.jar \
-    https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar \
-    && java -jar BuildTools.jar --output-dir /spigot
+# dos2unix fixes line endings for scripts
+RUN dos2unix /*.sh && chmod +x /*.sh
 
-ENTRYPOINT [ "/scripts/docker-entrypoint.sh" ]
-CMD [ "/usr/sbin/sshd", "-D" ]
+WORKDIR /data
 
-# TODO: (or just launch it in the background from the entrypoint?)
-#CMD /scripts/start.sh
+STOPSIGNAL SIGTERM
+
+ENTRYPOINT [ "/setup.sh" ]
