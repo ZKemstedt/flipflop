@@ -10,8 +10,6 @@ services:
       - "./db_data:/var/lib/mysql"
       - "./docker-scripts:/docker-entrypoint-initdb.d"
     restart: unless-stopped
-    ports:
-      - "3306:3306"
     expose:
       - "3306"
     environment: 
@@ -30,21 +28,15 @@ services:
       dockerfile: Dockerfile
     links:
       - sqldb:sqldb
-    expose:
-      - "22"
-      - "25565"
-      - "8123"
-      - "25575"
     ports:
       - "2220:22"     # ssh
       - "25565:25565" # minecraft
       - "8123:8123"   # dynmap
-      - "25575:25575" # rcon
     volumes: 
       - "./mc:/data"
     environment: 
-      XMS: "2G" # Starting Memory
-      XMX: "8G" # Max Memory Usage
+      XMS: "1G" # Starting Memory
+      XMX: "4G" # Max Memory Usage
       EULA: "TRUE"
     networks: 
       - mcnet
